@@ -3,14 +3,14 @@ import "./login.css";
 import { Form, Icon, Input, Button, Checkbox } from "antd";
 import { Link } from 'react-router-dom';
 export class LoginComponent extends Component<any> {
-  handleSubmit = (e: Event) => {
+  handleSubmit(e: Event):void {
     e.preventDefault();
     this.props.form.validateFields((err: any, values: any) => {
       if (!err) {
         console.log("Received values of form: ", values);
       }
     });
-  };
+  }
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
@@ -22,7 +22,7 @@ export class LoginComponent extends Component<any> {
             <Form.Item>
               {getFieldDecorator("username", {
                 rules: [
-                  { required: true, message: "Please input your username!" }
+                  { required: true, message: "不能为空！" }
                 ]
               })(
                 <Input
@@ -30,14 +30,14 @@ export class LoginComponent extends Component<any> {
                   prefix={
                     <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
                   }
-                  placeholder="请输入用户名"
+                  placeholder="请输入借书证卡号"
                 />
               )}
             </Form.Item>
             <Form.Item>
               {getFieldDecorator("password", {
                 rules: [
-                  { required: true, message: "Please input your Password!" }
+                  { required: true, message: "不能为空！" }
                 ]
               })(
                 <Input
@@ -51,7 +51,7 @@ export class LoginComponent extends Component<any> {
               )}
             </Form.Item>
             <div className="btn-area">
-              <Button type="primary" size="large" className="submit-btn">登录</Button>
+              <Button type="primary" size="large" className="submit-btn" onClick={(e:any) => {this.handleSubmit(e)}}>登录</Button>
               <Link className="turn-registry" to="/registry/"> 没有账号，去注册> </Link>
             </div>
           </Form>
